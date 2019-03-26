@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-2 border border-primary rounded shadow-sm bg-white ml-3 px-0 shadow-lg">
+        <jobmenu [departments]="departments"></jobmenu>
+        </div>
+        <div class="col-md-8 mt-4 ml-4">
+            <div>
+                <i class="material-icons align-middle pr-1">search</i>
+                <input type="text" placeholder="Seach by Name" #seachText>
+             </div>
+        
+            <div class="border border-primary rounded bg-white px-0 mt-2 shadow-lg" >
+            <form [formGroup]="editJobTitleForm" >
+            <table style="width: 100%;">
+                <thead>
+                <tr>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 15%;">Job Title</th>
+                    <th style="width: 15%;">In Department</th>
+                    <th style="width: 13%;">No Of Employees</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+                </thead>
+                
+                <ng-container *ngFor="let j of jobTitles">
+                  <tr>      
+                    <td valign="top">
+                        <i class="material-icons button edit" (click)="toggleEditJobTitle(j.id)">edit</i>
+                        <i class="material-icons button delete" (click)="deleteJobTitle(j.id)">delete</i>
+                    </td> 
+                    <td valign="top">
+                        {{ j.id }}
+                        <input *ngIf="showEditJobTitle && editThisJobTitle == j.id" type="hidden" style='width: 80%;' class="form-control" formControlName="id" (ngModelChange)="100" ngValue="100">
+                    </td>
+                    <td valign="top">
+                        {{ j.jobTitleName }}
+                        <input *ngIf="showEditJobTitle && editThisJobTitle == j.id" type="text" style='width: 80%;' class="form-control" formControlName="jobTitleName" value={{j.jobTitleName}}>
+                    </td>
+                    <td valign="top">
+                        {{ j.inDepartment }}
+                        <select *ngIf="showEditJobTitle && editThisJobTitle == j.id" class="form-control" formControlName="inDepartment" required>
+                            <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
+                          </select>
+                    </td>
+                    <td valign="top">
+                        {{ j.numberOfEmployees }}
+                        <a *ngIf="j.numberOfEmployees > 0" [routerLink]="['../Employees']">Show</a>
+                    </td>
+                   <td valign="bottom">
+                       &nbsp;
+                        <button *ngIf="showEditJobTitle && editThisJobTitle == j.id" type="submit" class="btn btn-danger" (click)="editJobTitle(j.id)">Update</button>
+                   </td>
+                  
+                </tr>
+            </ng-container>
+            </table>
+            </form>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-2 border border-primary rounded shadow-sm bg-white ml-3 px-0 shadow-lg">
+            No of Rota: {{noofRota()}}
+    </div>
+    
+    <div class="col-md-8 border border-primary rounded bg-white mt-4 ml-4 px-0 shadow-lg" >
+    
+        <table style="width: 100%;">
+            <thead>
+            <tr>
+                <th style="width: 5%;"></th>
+                <th style="width: 15px;" *ngFor="let e of employees">{{e.employeeName}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of days">
+                <td>{{d + 1}}</td>
+                <td *ngFor="let e of employees"><app-edit-input [data]='giveRotaDay(e.employeeId, d)' (focusOut)='saveCost($event)'></app-edit-input></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

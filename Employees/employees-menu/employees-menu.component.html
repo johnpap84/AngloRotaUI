@@ -1,0 +1,47 @@
+<table width="100%">
+  <thead>
+  <tr>
+    <th colspan="2" id="newEmployee" (click)="toggleShowNewEmployee()" class="button text-dark text-center">
+        <i *ngIf="showNewEmployee" class="material-icons align-middle">keyboard_arrow_right</i>
+        <i *ngIf="!showNewEmployee" class="material-icons align-middle">keyboard_arrow_down</i>
+        Add New Employee</th>
+  </tr>
+  </thead>
+
+<div *ngIf="showNewEmployee">
+<form [formGroup]="newEmployeeForm" (ngSubmit)="newEmployee()" novalidate>
+  <div *ngIf="validMessage != ''">
+    <h2 class="has-info">{{validMessage}}</h2>
+    </div>
+    <tr>
+      <td width="30%"><i class="material-icons">person_add</i></td>
+      <td><input type="text" class="form-control" formControlName="name" placeholder="Name" required autofocus></td>
+    </tr>
+    <tr>
+      <td><i class="material-icons">email</i></td>
+      <td><input type="text" class="form-control" formControlName="email" placeholder="Email address" required></td>
+    </tr>
+    <tr>
+      <td><i class="material-icons">phone</i></td>
+      <td><input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone number" required></td>
+    </tr>
+    <tr>
+      <td><i class="material-icons">place</i></td>
+      <td><select class="form-control" formControlName="department" (change)="departmentSelection($event.target.value)" required>
+        <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><i class="material-icons">record_voice_over</i></td>
+      <td><select class="form-control" formControlName="jobTitle" required>
+          <option *ngFor="let job of jobTitles" [value]="job.jobTitleName">{{job.jobTitleName}}</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><i class="material-icons card_travel">card_travel</i></td>
+      <td><input type="text" class="form-control" formControlName="holidayQuota" placeholder="Holiday Quota" required></td>
+    </tr>
+    <tr><td colspan="2"><button type="submit" class="btn btn-primary">Add</button></td></tr>
+
+</form>
+</div>

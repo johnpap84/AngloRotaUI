@@ -1,0 +1,23 @@
+<table width="100%">
+        <thead>
+        <tr>
+          <th colspan="2" id="newDepartment" (click)="toggleShowNewDepartment()" class="button text-dark text-center">
+              <i *ngIf="showNewEmployee" class="material-icons align-middle">keyboard_arrow_right</i>
+              <i *ngIf="!showNewEmployee" class="material-icons align-middle">keyboard_arrow_down</i>
+              Create New Department</th>
+        </tr>
+        </thead>
+      
+      <div *ngIf="showNewDepartment">
+      <form [formGroup]="newDepartmentForm" (ngSubmit)="newDepartment()" novalidate>
+        <div *ngIf="validMessage != ''">
+          <h2 class="has-info">{{validMessage}}</h2>
+          </div>
+          <tr>
+            <td width="30%"><i class="material-icons">person_add</i></td>
+            <td><input type="text" class="form-control" formControlName="departmentName" placeholder="Name od the Department" required autofocus></td>
+          </tr>
+          <tr><td colspan="2"><button type="submit" class="btn btn-primary">Add</button></td></tr>
+      
+      </form>
+      </div>

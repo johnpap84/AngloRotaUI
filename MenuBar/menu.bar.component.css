@@ -1,0 +1,39 @@
+.container-fluid {
+    height: 30px;
+    font-size: 18px;
+    padding-top: 4px;
+}
+
+.nav > li{
+    padding-left: 15px;
+  }
+
+  body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }
+
+  i.icon-red {
+    color: red;
+}
+
+.log_out {
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.log_out:hover {
+    color: red;
+    font-size: 18px;
+  }
+
+.mid_menu {
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.mid_menu:hover {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+  }
+
