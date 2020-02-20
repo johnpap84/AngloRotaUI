@@ -1,92 +1,84 @@
 <div class="row">
-    <div class="col-md-2 border border-primary rounded shadow-sm bg-white ml-3 px-0 shadow-lg">
-        <table class="mb-1" style="width: 100%;">
-            <thead>
-            <tr><th class="button text-dark text-center">No of Employees: {{employees.length}}</th></tr>
-            </thead>
-        </table>
-        <empmenu [departments]="departments"></empmenu>
-    </div>
-    <div class="col-md-8 mt-4 ml-4">
-        <nav class="nav d-flex shift">
-        <ul class="nav">
-            <li class="nav-item"><i class="material-icons align-middle pr-1">search</i>
-            <input type="text" [(ngModel)]="_employeeFilter.employeeName" placeholder="Seach by Name" #seachText></li>
-            </ul>
-        <ul class="nav navbar-nav navbar-center">
-         <li class="nav-item"><select (change)="departmentFilter($event.target.value)" class="col-md-12" >
-                <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
-                </select>
-                
-            </li>
-            </ul>
-            </nav>
-        <div class="border border-primary rounded bg-white px-0 mt-2 shadow-lg" >
-        <form [formGroup]="editEmployeeForm" >
+  <div class="col-md-2 ml-3 px-0">
+    <empmenu [departments]="departments" [employees]="employees"></empmenu>
+  </div>
+  <div class="col-md-8 mt-4 ml-4">
+    <nav class="nav d-flex shift">
+      <ul class="nav">
+        <li class="nav-item">
+          <i class="material-icons align-middle pr-1">search</i>
+          <input type="text" [(ngModel)]="_employeeFilter.employeeName" placeholder="Seach by Name" #seachText>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-center">
+        <li class="nav-item">
+          <select (change)="departmentFilter($event.target.value)" class="col-md-12">
+            <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
+          </select>
+
+        </li>
+      </ul>
+    </nav>
+    <div class="border border-primary rounded bg-white px-0 mt-2 shadow-lg">
+      <form [formGroup]="editEmployeeForm">
         <table style="width: 100%;">
-            <thead>
+          <thead>
             <tr>
-                <th style="width: 10%;"></th>
-                <th style="width: 5%;">ID</th>
-                <th style="width: 15%;">Name</th>
-                <th style="width: 15%;">Email</th>
-                <th style="width: 13%;">Phone</th>
-                <th style="width: 12%;">Department</th>
-                <th style="width: 12%;">Role</th>
-                <th style="width: 12%;">Hol Quota</th>
-                <th style="width: 10%;"></th>
+              <th style="width: 15%;">Name</th>
+              <th style="width: 15%;">Email</th>
+              <th style="width: 13%;">Phone</th>
+              <th style="width: 12%;">Department</th>
+              <th style="width: 12%;">Role</th>
+              <th style="width: 8%;">Hol Quota</th>
+              <th style="width: 8%;"></th>
             </tr>
-            </thead>
-            
-            <ng-container *ngFor="let e of employees | filterBy: _employeeFilter">
-              <tr *ngIf="_departmentFilter == e.department">      
-                <td valign="top">
-                    <i class="material-icons button edit" (click)="toggleEditEmployee(e.employeeId)">edit</i>
-                    <i class="material-icons button delete" (click)="deleteEmployee(e.employeeId)">delete</i>
-                </td> 
-                <td valign="top">
-                    {{ e.employeeId }}
-                    <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="hidden" style='width: 80%;' class="form-control" formControlName="employeeId">
-                </td>
-                <td valign="top">
-                    {{ e.name }}
-                    <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 80%;' class="form-control" formControlName="name" value={{e.name}}>
-                </td>
-                <td valign="top">
-                    {{ e.email }}
-                    <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 80%' class="form-control" formControlName="email" value={{e.email}}>
-                </td>
-                <td valign="top">
-                    {{ e.phoneNumber }}
-                    <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 80%;' class="form-control" formControlName="phoneNumber" value={{e.phoneNumber}}>
-                </td>
-                <td valign="top">
-                        <a class="text-dark" routerLink="../Departments">{{ e.department}}</a>
-                    <select *ngIf="showEditEmployee && editThisEmployee == e.employeeId" style='width: 80%;' (change)="departmentSelection($event.target.value)" class="form-control mdb-select md-form colorful-select dropdown-primary" formControlName="department" value={{e.department}} required>
-                        <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
-                        </select>
-                </td>
-                <td valign="top">
-                        <a class="text-dark" routerLink="../JobTitles">{{ e.jobTitle}}</a>
-                        <select *ngIf="showEditEmployee && editThisEmployee == e.employeeId" style='width: 80%;' class="form-control mdb-select md-form colorful-select dropdown-primary" formControlName="jobTitle" required>
-                            <option *ngFor="let job of jobTitles" [value]="job.jobTitleName">{{job.jobTitleName}}</option>
-                            </select>
-                    </td>
-                <td valign="top">
-                    {{ e.holidayQuota }}
-                    <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 40%;' class="form-control" formControlName="holidayQuota" value={{e.holidayQuota}}>
-                    
-               </td>
-               <td valign="bottom">
-                   &nbsp;
-                    <button *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="submit" class="btn btn-danger" (click)="editEmployee(e.employeeId)">Update</button>
-               </td>
-              
+          </thead>
+
+          <ng-container *ngFor="let e of employees | filterBy: _employeeFilter">
+            <tr *ngIf="_departmentFilter == e.department">
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">{{e.name}}</div>
+                <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 90%;' class="form-control" formControlName="name" [(ngModel)]="e.name">
+              </td>
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">{{e.email}}</div>
+                <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 90%' class="form-control" formControlName="email" [(ngModel)]="e.email">
+              </td>
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">{{ e.phoneNumber }}</div>
+                <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 90%;' class="form-control" formControlName="phoneNumber" [(ngModel)]="e.phoneNumber">
+              </td>
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">
+                  <a class="text-dark" routerLink="../Departments">{{ e.department}}</a>
+                </div>
+                <select *ngIf="showEditEmployee && editThisEmployee == e.employeeId" style='width: 90%;' (change)="departmentSelection($event.target.value)" class="form-control mdb-select md-form colorful-select dropdown-primary" formControlName="department" [ngModel]="e.department" required>
+                  <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
+                </select>
+              </td>
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">
+                  <a class="text-dark" routerLink="../JobTitles">{{ e.jobTitle}}</a>
+                </div>
+                <select *ngIf="showEditEmployee && editThisEmployee == e.employeeId" style='width: 90%;' class="form-control mdb-select md-form colorful-select dropdown-primary" formControlName="jobTitle" [ngModel]="e.jobTitle" required>
+                  <option *ngFor="let job of jobTitles" [value]="job.jobTitleName">{{job.jobTitleName}}</option>
+                </select>
+              </td>
+              <td>
+                <div *ngIf="!showEditEmployee || editThisEmployee != e.employeeId">{{ e.holidayQuota }}</div>
+                <input *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="text" style='width: 60%;' class="form-control" formControlName="holidayQuota" [(ngModel)]="e.holidayQuota">
+              </td>
+              <td>
+                <button *ngIf="showEditEmployee && editThisEmployee == e.employeeId" type="submit" class="btn btn-update" (click)="editEmployee(e.employeeId)">Update</button>
+
+                <i *ngIf="!showEditEmployee || editThisEmployee != e.employeeId" class="material-icons button edit" (click)="toggleEditEmployee(e.employeeId, e.department)">edit</i>&nbsp;&nbsp;
+                <i *ngIf="!showEditEmployee || editThisEmployee != e.employeeId" class="material-icons button delete" (click)="deleteEmployee(e.employeeId)">delete</i>
+              </td>
             </tr>
-        </ng-container>
+          </ng-container>
         </table>
 
-        </form>
-        </div>
+      </form>
     </div>
+  </div>
 </div>

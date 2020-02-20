@@ -9,58 +9,6 @@ body {
   color: #333;
 }
 
-table {
-  text-align: left;
-  line-height: 40px;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 0px solid #ed1c40;
-  margin: 0;
-}
-
-thead tr:first-child {
-  background: #CCE5FF;
-  color: black;
-  height: 10px;
-}
-
-th:first-child,
-td:first-child {
-  padding: 0 0 0 0;
-}
-
-th {
-  font-weight: 700;
-  border-bottom: 2px solid blue;
-}
-
-thead tr:last-child th {
-  border-bottom: 3px solid #ddd;
-}
-
-tbody tr:hover {
-  background-color: #f2f2f2;
-  cursor: default;
-}
-
-tbody tr:last-child td {
-  border: none;
-}
-
-tbody td {
-  border-bottom: 1px solid #ddd;
-}
-
-td:last-child {
-  text-align: left;
-  padding-right: 0;
-}
-
-td:first-child {
-  padding-left: 10px;
-  padding-top: 10px;
-}
-
 .navbar-nav.navbar-center {
   position: absolute;
   left: 50%;
@@ -72,11 +20,86 @@ td:first-child {
   cursor: pointer;
 }
 
+.btn-update {
+  cursor: pointer;
+  padding: 1px 5px 1px 5px !important;
+  color: black;
+  background-color: #ffbaba;
+  border-color: red;
+}
+
+  .btn-update:hover {
+    background-color: #dc2a2a;
+  }
+
 .edit:hover {
   color: #0a79df;
+}
+
+form input[type=text] {
+  width: 83%;
+  height: 30px;
+  font-size: 13px;
+  color: black;
+}
+
+form select {
+  width: 83%;
+  height: 30px;
+  font-size: 13px;
+  color: black;
 }
 
 .delete:hover {
   color: #dc2a2a;
 }
 
+.emp-menu {
+  background: #CCE5FF;
+  color: black;
+  height: 40px;
+  width: 100%;
+  border-bottom: 3px solid #ddd;
+  cursor: pointer;
+  margin: 0px !important;
+  margin-top: 10px !important;
+}
+
+p {
+  margin-top: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+  table th {
+    padding: 5px !important;
+    background: #CCE5FF;
+    height: 35px;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  table tr:nth-child(2n+1) {
+    background-color: #e7e7e7;
+  }
+
+
+  table td {
+    padding: 5px !important;
+    vertical-align: middle;
+    border: 1px solid #aaa !important;
+    height: 25px;
+  }
+
+  table td:last-child {
+     text-align: right;
+     border-left: none !important;
+  }
+
+    table td:nth-last-child(2) {
+      border-right: none !important;
+    }
