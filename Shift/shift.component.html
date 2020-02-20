@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-2 ml-3 px-0">
+    <shiftmenu></shiftmenu>
+  </div>
+
+  <div class="col-md-8 mt-4 ml-4">
+    <div>
+      <i class="material-icons align-middle pr-1">search</i>
+      <input type="text" placeholder="Seach by Name" #seachText>
+    </div>
+
+    <div class="border border-primary rounded bg-white px-0 mt-2 shadow-lg">
+      <form [formGroup]="editShiftForm">
+        <table style="width: 100%;">
+          <thead>
+            <tr>
+              <th style="width: 50%;">Name</th>
+              <th style="width: 15%;">Duration In Minutes</th>
+              <th style="width: 10%;"></th>
+            </tr>
+          </thead>
+
+          <ng-container *ngFor="let s of shifts">
+            <tr>
+              <td>
+                <div *ngIf="!showEditShift || editThisShift != s.shiftId">{{ s.shiftName }}</div>
+                <input *ngIf="showEditShift && editThisShift == s.shiftId" type="text" style='width: 80%;' class="form-control" formControlName="shiftName" [(ngModel)]="s.shiftName">
+              </td>
+              <td>
+                <div *ngIf="!showEditShift || editThisShift != s.shiftId">{{ s.durationInMins }} Mins</div>
+                <input *ngIf="showEditShift && editThisShift == s.shiftId" type="text" style='width: 80%;' class="form-control" formControlName="shiftDurationInMins" [(ngModel)]="s.durationinMins">
+              </td>
+              <td>
+                <button *ngIf="showEditShift && editThisShift == s.shiftId" type="submit" class="btn btn-update" (click)="editShift(s.shiftId)">Update</button>
+
+                <i *ngIf="!showEditShift || editThisShift != s.shiftId" class="material-icons button edit" (click)="toggleEditShift(s.shiftId)">edit</i>
+                <i *ngIf="!showEditShift || editThisShift != s.shiftId" class="material-icons button delete" (click)="deleteShift(s.shiftId)">delete</i>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
