@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { trigger, transition, animate, style } from '@angular/animations'
 import { DepartmentServices } from 'src/app/Services/departmentServices';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -6,7 +7,18 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'depmenu',
   templateUrl: './departments-menu.component.html',
-  styleUrls: ['../../app.component.css', 'departments-menu.component.css']
+  styleUrls: ['../../app.component.css', 'departments-menu.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateY(-20%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(0%)', opacity: '100' }))
+      ]),
+      transition(':leave', [
+        animate('500ms ease-in', style({ transform: 'translateX(-100%)', opacity: '0' }))
+      ])
+    ])
+  ]
 })
 
 export class DepartmentsMenu implements OnInit {
@@ -33,7 +45,7 @@ export class DepartmentsMenu implements OnInit {
     newDepartment() {
       console.log(this.newDepartmentForm.value);
       if (this.newDepartmentForm.valid) {
-        this.validMessage = "New employee has been added to the Database.";
+        this.validMessage = "Department created.";
         
         this.departmentData.addDepartment(this.newDepartmentForm.value)
           .subscribe(data => {
