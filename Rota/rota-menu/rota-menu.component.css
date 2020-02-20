@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+.rota-menu {
+  background: #CCE5FF;
+  color: black;
+  height: 40px;
+  width: 100%;
+  border-bottom: 3px solid #ddd;
+  cursor: pointer;
+  margin: 0px;
+  text-align: center;
+}
+
+  .rota-menu:hover {
+    font-size: 17px;
+  }
+
+.btn-primary {
+  cursor: pointer;
+  width: 100%;
+  padding: 1px 5px 1px 5px !important;
+  color: black;
+  background: #CCE5FF;
+}
+
+p {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+form input[type=text] {
+  width: 83%;
+  height: 30px;
+  font-size: 13px;
+  color: black;
+}
+
+form select {
+  width: 83%;
+  height: 30px;
+  font-size: 13px;
+  color: black;
+}
+
+.container {
+  padding: 10px 0 10px 0;
+}
+
+  .container * {
+    padding: 4px 5px 4px 5px;
+  }
