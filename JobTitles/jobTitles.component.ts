@@ -48,11 +48,9 @@ export class JobTitlesComponent implements OnInit {
         }
 
         editJobTitle(id: number) {
-
           this.editJobTitleForm.get('id').setValue(id);
-          
           this.jobTitleData.updateJobTitle(this.editJobTitleForm.value);
-          //location.reload();
+          location.reload();
         }
 
         deleteJobTitle(id: number): void {
