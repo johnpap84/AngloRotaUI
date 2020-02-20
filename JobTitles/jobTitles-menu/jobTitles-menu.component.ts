@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { trigger, transition, animate, style } from '@angular/animations'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { JobTitleServices } from 'src/app/Services/jobTitleServices';
@@ -9,7 +10,18 @@ import { Department } from 'src/app/Models/department';
 @Component({
   selector: 'jobmenu',
   templateUrl: './jobTitles-menu.component.html',
-  styleUrls: ['../../app.component.css', 'jobTitles-menu.component.css']
+  styleUrls: ['../../app.component.css', 'jobTitles-menu.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateY(-20%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(0%)', opacity: '100' }))
+      ]),
+      transition(':leave', [
+        animate('500ms ease-in', style({ transform: 'translateX(-100%)', opacity: '0' }))
+      ])
+    ])
+  ]
 })
 
 export class JobTitlesMenu implements OnInit {

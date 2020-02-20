@@ -1,29 +1,43 @@
-<table width="100%">
-    <thead>
-    <tr>
-      <th colspan="2" id="newJobTitle" (click)="toggleShowNewJobTitle()" class="button text-dark text-center">
-          <i *ngIf="showNewJobTitle" class="material-icons align-middle">keyboard_arrow_right</i>
-          <i *ngIf="!showNewJobTitle" class="material-icons align-middle">keyboard_arrow_down</i>
-          Create New Job Title</th>
-    </tr>
-    </thead>
-  
-  <div *ngIf="showNewJobTitle">
-  <form [formGroup]="newJobTitleForm" (ngSubmit)="newJobTitle()" novalidate>
-    <div *ngIf="validMessage != ''">
-      <h2 class="has-info">{{validMessage}}</h2>
-      </div>
-      <tr>
-        <td width="30%"><i class="material-icons">person_add</i></td>
-        <td><input type="text" class="form-control" formControlName="jobTitleName" placeholder="Job Title Name" required autofocus></td>
-      </tr>
-      <tr>
-        <td><i class="material-icons">place</i></td>
-        <td><select class="form-control" formControlName="inDepartment" required>
-          <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
-        </select></td>
-      </tr>
-      <tr><td colspan="2"><button type="submit" class="btn btn-primary">Add</button></td></tr>
-  
-  </form>
+
+<div class="row job-menu border border-primary rounded shadow-sm shadow-lg mt-2" (click)="toggleShowNewJobTitle()">
+  <div class="col-md-8 offset-md-0">
+    <p>New&nbsp;Job&nbsp;Title</p>
   </div>
+  <div class="col-md-2 offset-md-1">
+    <p>
+      <i *ngIf="showNewDepartment" class="material-icons align-middle">keyboard_arrow_right</i>
+      <i *ngIf="!showNewDepartment" class="material-icons align-middle">keyboard_arrow_down</i>
+    </p>
+  </div>
+</div>
+
+<div *ngIf="showNewJobTitle" [@slideInOut] class="bg-white border border-primary rounded shadow-sm shadow-lg mt-3">
+  <form [formGroup]="newJobTitleForm" (ngSubmit)="newJobTitle()" novalidate>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 offset-md-0" align="right">
+          <i class="material-icons">person_add</i>
+        </div>
+        <div class="col-md-10 offset-md-0">
+          <input type="text" class="form-control" formControlName="jobTitleName" placeholder="Job Title Name" required autofocus>
+        </div>
+        <div class="col-md-2 offset-md-0" align="right">
+          <i class="material-icons">place</i>
+        </div>
+        <div class="col-md-10 offset-md-0">
+          <select class="form-control" formControlName="inDepartment" required>
+            <option *ngFor="let dep of departments" [value]="dep.departmentName">{{dep.departmentName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 offset-md-7">
+        <button type="submit" class="btn btn-primary">+ Add</button>
+      </div>
+      <div *ngIf="validMessage != ''" class="col-md-8 offset-md-2">
+        <div class="validMessage">
+          {{validMessage}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
