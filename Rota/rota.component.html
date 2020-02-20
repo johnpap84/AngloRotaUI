@@ -1,22 +1,112 @@
 <div class="row">
-    <div class="col-md-2 border border-primary rounded shadow-sm bg-white ml-3 px-0 shadow-lg">
-            No of Rota: {{noofRota()}}
+  <div class="col-md-2 ml-3 px-0">
+    <rotamenu [rota]="rota"></rotamenu>
+  </div>
+  <div class="col-md-8 mt-4 ml-4">
+
+    <nav class="nav d-flex shift">
+      <ul class="nav">
+        <li class="nav-item">
+          <button type="submit" class="btn btn-primary" (click)="saveRotaChanges()"><i class="material-icons" style="vertical-align: top !important;">save_alt</i>&nbsp;Save</button>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-center">
+        <li>
+          <select (change)="loadDepartment($event.target.value)" class="col-md-12">
+            <option *ngFor="let dep of departments" [value]="dep.departmentId">{{dep.departmentName}}</option>
+          </select>
+        </li>
+      </ul>
+
+      <ul class="nav" style="position: absolute; left: 65%;">
+        <li>
+          <select class="col-md-12">
+            <option *ngFor="let month of monthArray" [value]="month">{{month}}</option>
+          </select>
+        </li>
+      </ul>
+    </nav>
+
+    <div>
     </div>
-    
-    <div class="col-md-8 border border-primary rounded bg-white mt-4 ml-4 px-0 shadow-lg" >
-    
-        <table style="width: 100%;">
-            <thead>
-            <tr>
-                <th style="width: 5%;"></th>
-                <th style="width: 15px;" *ngFor="let e of employees">{{e.employeeName}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let d of days">
-                <td>{{d + 1}}</td>
-                <td *ngFor="let e of employees"><app-edit-input [data]='giveRotaDay(e.employeeId, d)' (focusOut)='saveCost($event)'></app-edit-input></td>
-                </tr>
-            </tbody>
-        </table>
+
+    <!--<div class="px-0 mt-2">
+      <table class="border border-primary rounded shadow-lg">
+        <thead>
+          <tr>
+            <td></td>
+            <th *ngFor="let j of filterJobTitles()" [attr.colspan]="j.employeesInJob.length">
+              {{j.jobTitleName}}
+            </th>
+          </tr>
+          <tr>
+            <td></td>
+            <th *ngFor="let e of employees">
+              {{e.name}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of days">
+            <td>{{d}}.</td>
+            <td *ngFor="let e of employees">
+              <span *ngIf="rotaArray[e.employeeId]">
+                <input type="text" [ngModel]="rotaArray[e.employeeId][d]" (blur)="saveRotaData(e.employeeId, d, $event.target.value)" />
+              </span>
+              {{rotaArray[e.employeeId][d]}}
+              [(ngModel)]="this.rotaArray[e.employeeId][d+1]"
+              <app-edit-input [data]='giveRotaDay(e.employeeId, d)' (focusOut)='saveCost($event)'></app-edit-input>
+            </td>
+            <td>
+              {{employeeTotalHours[e.employeeId]}}
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let h of employeeTotalHours">
+              {{h}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>-->
+
+    <div class="px-0 mt-2">
+      <table class="border border-primary rounded shadow-lg">
+        <thead>
+          <tr>
+            <td></td>
+            <th *ngFor="let d of days">
+              {{weekdays[d]}}
+            </th>
+            <th rowspan="2">
+              Total
+            </th>
+          </tr>
+          <tr>
+            <td></td>
+            <th *ngFor="let d of days">{{d}}.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of employees">
+            <td>
+              {{e.name}}
+            </td>
+            <td *ngFor="let d of days">
+              <span *ngIf="rotaArray[e.employeeId]">
+                <input type="text" [ngModel]="rotaArray[e.employeeId][d]" (blur)="saveRotaData(e.employeeId, d, $event.target.value)"
+                        [ngStyle]="{'color':rotaArray[e.employeeId][d] === 'H' ? 'red' : rotaArray[e.employeeId][d] === 'S' ? 'green' : 'black',
+                                    'font-weight':rotaArray[e.employeeId][d] === 'H' || rotaArray[e.employeeId][d] === 'S' ? 'bold' : '' }" />
+              </span>
+            </td>
+            <td *ngIf="employeeTotalHours[e.employeeId]">
+              {{employeeTotalHours[e.employeeId]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+</div>
