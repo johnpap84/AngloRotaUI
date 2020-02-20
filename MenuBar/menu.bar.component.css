@@ -37,3 +37,11 @@
     font-size: 18px;
   }
 
+.tools-menu {
+  background-color: #cce5ff;
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+}
+
